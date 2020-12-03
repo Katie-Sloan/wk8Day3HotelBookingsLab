@@ -3,16 +3,17 @@
       <h2>Add a Booking</h2>
       <div>
           <label for="name">Name:</label>
-          <input type="text" id="name" v-model="name"/>
+          <input type="text" id="name" v-model="name" required/>
       </div>
       <div>
           <label for="email">Email:</label>
-          <input type="text" id="email" v-model="email"/>
+          <input type="text" id="email" v-model="email" required/>
       </div>
       <div>
-          <input type="radio" id="true" name="checked-in" value="true">
+          <p>Checked in?</p>
+          <input type="radio" id="true" name="checked-in" value="true" v-model="checkedIn">
           <label for="true">True</label><br>
-          <input type="radio" id="false" name="checked-in" value="false">
+          <input type="radio" id="false" name="checked-in" value="false" v-model="checkedIn">
           <label for="false">False</label>
       </div>
 
@@ -44,6 +45,8 @@ export default {
             BookingService.postBooking(booking).then((res) =>
                 eventBus.$emit("booking-added", res)
             );
+            this.name = this.email = '';
+            this.checked_in = null;
         },
     },
 };
